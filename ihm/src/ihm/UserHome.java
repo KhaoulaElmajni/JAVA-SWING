@@ -18,6 +18,10 @@ import javax.swing.border.EmptyBorder;
 
 public class UserHome extends JFrame {
 
+	//*******utilisé comme controle de version 
+	//Si on ne déclare pas explicitement un serialVersionUID JVM le fera automatiquement
+	//Serialization means you save the objects as bytes somewhere
+	
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
@@ -25,6 +29,11 @@ public class UserHome extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
+    	//*******for controling the components***********
+    	//***Swing processing is done in a thread called EDT (Event Dispatching Thread). 
+    	//Therefore we would block the GUI if we would compute some long calculations in this thread
+//The way to go here is to process our calculation in a different thread, so our GUI stays responsive 
+    	
         EventQueue.invokeLater(new Runnable() {
             @Override
 			public void run() {
@@ -45,7 +54,7 @@ public class UserHome extends JFrame {
     /**
      * Create the frame.
      */
-    public UserHome(String userSes) {
+    public UserHome(String userChangedPWD) {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(450, 30, 1014, 1000);
@@ -56,7 +65,7 @@ public class UserHome extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         contentPane.setBackground(Color.CYAN);
-        
+        //******logout******
         JButton logoutButton = new JButton("Logout");
         logoutButton.setForeground(new Color(0, 0, 0));
         logoutButton.setBackground(UIManager.getColor("Button.disabledForeground"));
@@ -95,14 +104,16 @@ public class UserHome extends JFrame {
         });
         logoutButton.setBounds(247, 118, 491, 114);
         contentPane.add(logoutButton);
+        //*****change password*****
         JButton changePwdButton = new JButton("Change-password\r\n");
         changePwdButton.setBackground(UIManager.getColor("Button.disabledForeground"));
         changePwdButton.addActionListener(new ActionListener() {
             @Override
 			public void actionPerformed(ActionEvent e) {
-                ChangePassword bo = new ChangePassword(userSes);
-                bo.setTitle("Change Password");
-                bo.setVisible(true);
+            	//*****userChangedPWD is the new PWD*********
+                ChangePassword CP = new ChangePassword(userChangedPWD);
+                CP.setTitle("Change Password");
+                CP.setVisible(true);
 
             }
         });
@@ -111,7 +122,7 @@ public class UserHome extends JFrame {
         contentPane.add(changePwdButton);
         
         
-        
+        //*********** events list btn*********
         JButton eventsListButton = new JButton("Events List\r\n");
         eventsListButton.setBackground(UIManager.getColor("Button.disabledForeground"));
         eventsListButton.addActionListener(new ActionListener() {
@@ -129,6 +140,7 @@ public class UserHome extends JFrame {
         eventsListButton.setBounds(247, 382, 491, 114);
         contentPane.add(eventsListButton);
         
+        //*********archive list btn************
         
         JButton archiveListButton = new JButton("Archive List\r\n");
         archiveListButton.setBackground(UIManager.getColor("Button.disabledForeground"));
@@ -148,6 +160,7 @@ public class UserHome extends JFrame {
         contentPane.add(archiveListButton);
         
         
+        //*************add event btn************
         
         JButton addEventButton = new JButton("Add Event\r\n");
         addEventButton.setBackground(UIManager.getColor("Button.disabledForeground"));

@@ -43,6 +43,11 @@ public class UserLogin extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
+    	//*******for controling the components***********
+    	//***Swing processing is done in a thread called EDT (Event Dispatching Thread). 
+    	//Therefore we would block the GUI if we would compute some long calculations in this thread
+//The way to go here is to process our calculation in a different thread, so our GUI stays responsive 
+    	
         EventQueue.invokeLater(new Runnable() {
             @Override
 			public void run() {
@@ -171,9 +176,7 @@ public class UserLogin extends JFrame {
             }
         });
 
-        contentPane.add(loginButton);
-
-       
+        contentPane.add(loginButton);   
    
     }
 }

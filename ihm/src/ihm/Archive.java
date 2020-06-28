@@ -28,11 +28,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class Archive extends JFrame implements ActionListener,ItemListener{
 	
+	//*******utilisé comme controle de version 
+	//Si on ne déclare pas explicitement un serialVersionUID JVM le fera automatiquement
+	//Serialization means you save the objects as bytes somewhere
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	
 
-    static JTable mysTable;
+    static JTable myTable;
     JButton desarchiveButton;
     JButton delete;
    
@@ -56,11 +60,8 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 		          
 		        
 		        //----------------affichage------------------
-		        mysTable = new JTable();
-		          JScrollPane myPanel = new JScrollPane(mysTable,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-		                                                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-
-		          mysTable.setPreferredScrollableViewportSize(new Dimension(500,70));
+		        myTable = new JTable();
+		          myTable.setPreferredScrollableViewportSize(new Dimension(500,70));
 		        
 		          try {
 		              Class.forName("com.mysql.jdbc.Driver");
@@ -92,7 +93,7 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 		        } 
 		        
 		        
-		        
+		        //***************logout btn*************
 		        
 		        JButton logoutButton = new JButton("Logout");
 		        logoutButton.setForeground(new Color(0, 0, 0));
@@ -102,17 +103,17 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 		            @Override
 					public void actionPerformed(ActionEvent e) {
 		                int a = JOptionPane.showConfirmDialog(logoutButton, "Are you sure?");
-		                // JOptionPane.setRootFrame(null);
+		               
 		                if (a == JOptionPane.YES_OPTION) {
 		                    dispose();
 		                    UserLogin obj = null;
 							try {
 								obj = new UserLogin();
 							} catch (UnsupportedLookAndFeelException e1) {
-								// TODO Auto-generated catch block
+							
 								e1.printStackTrace();
 							}
-		                    obj.setTitle("User-Login");
+		                    obj.setTitle("Events Management");
 		                    obj.setVisible(true);
 		                }
 		                
@@ -121,11 +122,11 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 						try {
 							obj = new UserLogin();
 						} catch (UnsupportedLookAndFeelException e1) {
-							// TODO Auto-generated catch block
+						
 							e1.printStackTrace();
 						}
 
-		                obj.setTitle("User-Login");
+		                obj.setTitle("Events Management");
 		                obj.setVisible(true);
 
 		            }
@@ -134,7 +135,7 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 		        contentPane.add(logoutButton);
 		        
 		        
-		      //------return button
+		      //------return button------------------------
 		        
 		        JButton returnButton = new JButton("Return");
 		        returnButton.setForeground(new Color(0, 0, 0));
@@ -156,20 +157,14 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 		        });
 		        returnButton.setBounds(700, 460, 120, 50);
 		        contentPane.add(returnButton);
-		      //------desarchive button--------
+		        
+		      //-------------desarchive button------------------
 		        
 		       desarchiveButton = new JButton("Desarchivate");
 		        desarchiveButton.setForeground(new Color(0, 0, 0));
 		        desarchiveButton.setBackground(UIManager.getColor("Button.disabledForeground"));
 		        desarchiveButton.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		        desarchiveButton.addActionListener(new ActionListener() {
-		            @Override
-					public void actionPerformed(ActionEvent e) {
-		                
-		            
-
-		            }
-		        });
+		        
 		        desarchiveButton.setBounds(500, 460, 170, 50);
 		        contentPane.add(desarchiveButton);
 		        
@@ -181,14 +176,7 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 		        delete.setForeground(new Color(0, 0, 0));
 		        delete.setBackground(UIManager.getColor("Button.disabledForeground"));
 		        delete.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		        delete.addActionListener(new ActionListener() {
-			            @Override
-						public void actionPerformed(ActionEvent e) {
-			                
-			            
-
-			            }
-			        });
+		        
 		        delete.setBounds(300, 460, 220, 50);
 			        contentPane.add(delete);
 			        
@@ -257,11 +245,12 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 	
 	
 	public void actionPerformed(ActionEvent arg0) {
-		int selct=table.getSelectedRow();
-		String selcttitre=(String) table.getModel().getValueAt(selct,0);
-		String selctdescription=(String) table.getModel().getValueAt(selct,1);
-		String selctplace=(String) table.getModel().getValueAt(selct,2);
-		java.sql.Date selctdate= (java.sql.Date) table.getModel().getValueAt(selct,3);
+		int selected=table.getSelectedRow();
+		String selectName=(String) table.getModel().getValueAt(selected,0);
+		String selectdescription=(String) table.getModel().getValueAt(selected,1);
+		String selectplace=(String) table.getModel().getValueAt(selected,2);
+		java.sql.Date selectdate= (java.sql.Date) table.getModel().getValueAt(selected,3);
+		
 		if(arg0.getSource()==desarchiveButton) {
 			try {
 	            Class.forName("com.mysql.jdbc.Driver");
@@ -270,9 +259,14 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 	            String password = "khaoula";
 	         
 	            java.sql.Connection con = DriverManager.getConnection(url, name, password);
-	            String query ="Update events set isarchived=false where name = '"+selcttitre +"' and description ='"+selctdescription+ "' and place = '"+selctplace +"' and date='"+selctdate +"'" ;
+	            String query ="Update events set isarchived=false where name = '"+selectName +"' and description ='"+selectdescription+ "' and place = '"+selectplace +"' and date='"+selectdate +"'" ;
+	            
+		          //une instruction SQL est précompilée et stockée dans un objet PreparedStatement. 
+	                //Cet objet peut ensuite être utilisé pour exécuter 
+	                //efficacement cette instruction plusieurs fois
+	            
 	            PreparedStatement preparedStmt = con.prepareStatement(query);
-	        
+	            
 	            preparedStmt.executeUpdate();
 	            
 	            con.close(); 
@@ -295,7 +289,7 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 	              String password = "khaoula";
 	              
 	              java.sql.Connection con = DriverManager.getConnection(url, name, password);
-	              String query ="delete from events where name = '"+selcttitre +"' and description ='"+selctdescription+"' and place = '"+selctplace +"' and date='"+selctdate +"' " ;
+	              String query ="delete from events where name = '"+selectName +"' and description ='"+selectdescription+"' and place = '"+selectplace +"' and date='"+selectdate +"' " ;
 	              PreparedStatement preparedStmt = con.prepareStatement(query);
 	              
 	              preparedStmt.executeUpdate();
@@ -314,7 +308,5 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 		}
 		
 	}
-	 
-	 
 	
 }

@@ -26,6 +26,9 @@ import com.toedter.calendar.JDateChooser;
 
 public class AddEvent extends JFrame{
 
+	//*******utilisé comme controle de version 
+	//Si on ne déclare pas explicitement un serialVersionUID JVM le fera automatiquement
+	//Serialization means you save the objects as bytes somewhere
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -47,7 +50,7 @@ public class AddEvent extends JFrame{
 	        contentPane.setLayout(null);
 	        contentPane.setBackground(Color.CYAN);
 	        
-	        //-----eventName----
+	        //---------eventName---------
 	        eventName = new JTextField();
 	        eventName.setFont(new Font("Tahoma", Font.PLAIN, 20));
 	        eventName.setBounds(470, 30, 500, 68);
@@ -115,17 +118,16 @@ public class AddEvent extends JFrame{
 	            @Override
 				public void actionPerformed(ActionEvent e) {
 	                int a = JOptionPane.showConfirmDialog(logoutButton, "Are you sure?");
-	                // JOptionPane.setRootFrame(null);
+	              
 	                if (a == JOptionPane.YES_OPTION) {
 	                    dispose();
 	                    UserLogin obj = null;
 						try {
 							obj = new UserLogin();
 						} catch (UnsupportedLookAndFeelException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-	                    obj.setTitle("User-Login");
+	                    obj.setTitle("Events Management");
 	                    obj.setVisible(true);
 	                }
 	                
@@ -134,11 +136,11 @@ public class AddEvent extends JFrame{
 					try {
 						obj = new UserLogin();
 					} catch (UnsupportedLookAndFeelException e1) {
-						// TODO Auto-generated catch block
+						
 						e1.printStackTrace();
 					}
 
-	                obj.setTitle("User-Login");
+	                obj.setTitle("Events Management");
 	                obj.setVisible(true);
 
 	            }
@@ -146,7 +148,8 @@ public class AddEvent extends JFrame{
 	        logoutButton.setBounds(860, 460, 120, 50);
 	        contentPane.add(logoutButton);
 	        
-//------return button---------
+
+	        //------return button---------
 	        
 	        JButton returnButton = new JButton("Return");
 	        returnButton.setForeground(new Color(0, 0, 0));

@@ -17,6 +17,10 @@ import java.text.SimpleDateFormat;
 import com.toedter.calendar.JDateChooser;
 public class Modifier extends  JFrame implements ActionListener,ItemListener {
 	
+	//*******utilisé comme controle de version 
+	//Si on ne déclare pas explicitement un serialVersionUID JVM le fera automatiquement
+	//Serialization means you save the objects as bytes somewhere
+	
 	private static final long serialVersionUID = 1L;
 	//public  Object request;
     JButton Modifier;
@@ -26,19 +30,19 @@ public class Modifier extends  JFrame implements ActionListener,ItemListener {
     JTextField Place;
     JLabel lblname;
     JLabel lbldescription;
-    JLabel place;
-    JLabel date;
+    JLabel lblplace;
+    JLabel lbldate;
     private JDateChooser dateChooser;
-    String selecttitre;
+    String selectname;
     String selectdescription;
-    java.sql.Date selctdate;
+    java.sql.Date selectdate;
     String Selectplace;
     
-	public Modifier(String selecttitre,java.sql.Date selctdate, String selctdescription ,String Selectplace) {
-		this.selecttitre=selecttitre;
+	public Modifier(String selectname,java.sql.Date selectdate, String selectdescription ,String Selectplace) {
+		this.selectname=selectname;
 		this.Selectplace=Selectplace;
-		this.selctdate=selctdate;
-		this.selectdescription = selctdescription;
+		this.selectdate=selectdate;
+		this.selectdescription = selectdescription;
 		     frame = new JFrame("Events Management");
 		     frame.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\DESKTOP\\book.png"));
 
@@ -46,28 +50,28 @@ public class Modifier extends  JFrame implements ActionListener,ItemListener {
                  frame.setLayout(new GridLayout(5,2));
                  frame.setBackground(Color.CYAN);
                  frame.setBounds(450, 190, 500, 597);;
-               eventname =new JTextField(selecttitre);
+               eventname =new JTextField(selectname);
                 eventname.setSize(10,10);
-                description =new JTextField(selecttitre);
+                description =new JTextField(selectname);
                 description.setSize(10,10);
-                 Place =new JTextField(selctdescription);
+                 Place =new JTextField(selectdescription);
                 
          		lblname =new JLabel("Event Name");
         		lbldescription =new JLabel("Event Description");
-        		place =new JLabel("Place");
-        		date =new JLabel("Date");
+        		lblplace =new JLabel("Place");
+        		lbldate =new JLabel("Date");
         		 Modifier=new JButton("Modifier");
         		 dateChooser = new JDateChooser();
         		 dateChooser.setDateFormatString("yyyy-MM-dd");
         		 dateChooser.getDateFormatString();
-        		 dateChooser.setDate(selctdate);
+        		 dateChooser.setDate(selectdate);
         		 Modifier.setSize( 30, 20);
         		 
                 frame.add(lblname);
                 frame.add(eventname);
-                frame.add(place);
+                frame.add(lblplace);
                 frame.add(Place);
-                frame.add(date);
+                frame.add(lbldate);
                 frame.add(dateChooser);
                frame.add(lbldescription);
                frame.add(description);
@@ -84,7 +88,7 @@ public class Modifier extends  JFrame implements ActionListener,ItemListener {
 
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
@@ -102,8 +106,12 @@ public class Modifier extends  JFrame implements ActionListener,ItemListener {
 	              SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	              System.out.println(sdf.format(dateChooser.getDate()));
 	              java.sql.Connection con = DriverManager.getConnection(url, name, password);
-	              String query ="Update events set name='"+ eventname.getText()+"', description='"+description.getText()+"' ,place='"+Place.getText()+"', date='"+ sdf.format(dateChooser.getDate())+"' where name = '"+selecttitre +"'"
-	              		+ " and description = '"+selectdescription+"' and place = '"+Selectplace +"' and date='"+selctdate +"'" ;
+	              
+	              String query ="Update events set name='"+ eventname.getText()+"', description='"+description.getText()+"' ,place='"+Place.getText()+"', date='"+ sdf.format(dateChooser.getDate())+"' where name = '"+selectname +"'"
+	              		+ " and description = '"+selectdescription+"' and place = '"+Selectplace +"' and date='"+selectdate +"'" ;
+	            //une instruction SQL est précompilée et stockée dans un objet PreparedStatement. 
+	                //Cet objet peut ensuite être utilisé pour exécuter 
+	                //efficacement cette instruction plusieurs fois
 	              PreparedStatement preparedStmt = con.prepareStatement(query);
 	              
 	              preparedStmt.executeUpdate();

@@ -3,6 +3,7 @@ package ihm;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -20,6 +21,11 @@ import javax.swing.border.EmptyBorder;
 
 public class ChangePassword extends JFrame {
 
+	
+	//*******utilisé comme controle de version 
+	//Si on ne déclare pas explicitement un serialVersionUID JVM le fera automatiquement
+	//Serialization means you save the objects as bytes somewhere
+	
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textField;
@@ -29,6 +35,10 @@ public class ChangePassword extends JFrame {
      * Launch the application.
      */
     public static void main(String[] args) {
+    	//*******for controling the components***********
+    	//***Swing processing is done in a thread called EDT (Event Dispatching Thread). 
+    	//Therefore we would block the GUI if we would compute some long calculations in this thread
+//The way to go here is to process our calculation in a different thread, so our GUI stays responsive 
         EventQueue.invokeLater(new Runnable() {
             @Override
 			public void run() {
@@ -47,8 +57,10 @@ public class ChangePassword extends JFrame {
     public ChangePassword(String name) {
         setBounds(450, 360, 1024, 234);
         setResizable(false);
+        setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\DESKTOP\\book.png"));
+        setBackground(Color.CYAN);
         
-
+//********gestionnaire de de répartition*****
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -60,8 +72,8 @@ public class ChangePassword extends JFrame {
         contentPane.add(textField);
         textField.setColumns(10);
 
-        JButton btnSearch = new JButton("Enter");
-        btnSearch.addActionListener(new ActionListener() {
+        JButton enter = new JButton("Enter");
+        enter.addActionListener(new ActionListener() {
             @Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -72,14 +84,16 @@ public class ChangePassword extends JFrame {
 
                     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ihm-java-swing",
                         "khaoula", "khaoula");
-
+                  //une instruction SQL est précompilée et stockée dans un objet PreparedStatement 
+                    //Cet objet peut ensuite être utilisé pour exécuter 
+                    //efficacement cette instruction plusieurs fois
                     PreparedStatement st = con
                         .prepareStatement("Update user set password=? where name=?");
 
                     st.setString(1, pstr);
                     st.setString(2, name);
                     st.executeUpdate();
-                    JOptionPane.showMessageDialog(btnSearch, "Password has been successfully changed");
+                    JOptionPane.showMessageDialog(enter, "Password has been successfully changed");
 
                 } catch (SQLException sqlException) {
                     sqlException.printStackTrace();
@@ -87,10 +101,10 @@ public class ChangePassword extends JFrame {
 
             }
         });
-        btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 29));
-        btnSearch.setBackground(new Color(240, 240, 240));
-        btnSearch.setBounds(438, 127, 170, 59);
-        contentPane.add(btnSearch);
+        enter.setFont(new Font("Tahoma", Font.PLAIN, 29));
+        enter.setBackground(new Color(240, 240, 240));
+        enter.setBounds(438, 127, 170, 59);
+        contentPane.add(enter);
 
         lblEnterNewPassword = new JLabel("Enter New Password :");
         lblEnterNewPassword.setFont(new Font("Tahoma", Font.PLAIN, 30));
