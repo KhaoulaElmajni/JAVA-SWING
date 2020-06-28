@@ -26,10 +26,6 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.mysql.cj.xdevapi.Statement;
-import com.sun.corba.se.pept.transport.Connection;
-
-
 import ihm.UserLogin;
 
 public class EventsList extends JFrame implements ActionListener,ItemListener{
@@ -46,7 +42,7 @@ public class EventsList extends JFrame implements ActionListener,ItemListener{
 	 public EventsList (){
 		 setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		 
-		 setBounds(450, 190, 1014, 597);
+		 setBounds(450, 190, 500, 597);
 	        setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\DESKTOP\\book.png"));
 	        setTitle("Events List");
 		 setResizable(true);
@@ -54,8 +50,9 @@ public class EventsList extends JFrame implements ActionListener,ItemListener{
 	        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	        setContentPane(contentPane);
 	        contentPane.setLayout(null);
+	        contentPane.setBackground(Color.CYAN);
 	        
-	        
+	       
 	       
 	          this.setLayout(new FlowLayout());
 	          
@@ -139,7 +136,7 @@ public class EventsList extends JFrame implements ActionListener,ItemListener{
 	        logoutButton.setBounds(860, 460, 120, 50);
 	        contentPane.add(logoutButton);
 	        
-	        //------return button
+	        //------return button----------
 	        
 	        JButton returnButton = new JButton("Return");
 	        returnButton.setForeground(new Color(0, 0, 0));
@@ -210,7 +207,7 @@ public class EventsList extends JFrame implements ActionListener,ItemListener{
 
 	            }
 	        });
-	        updateButton.setBounds(220, 460, 120, 50);
+	        updateButton.setBounds(100, 460, 120, 50);
 	        contentPane.add(updateButton);
 	        
 	        

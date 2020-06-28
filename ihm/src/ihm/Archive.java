@@ -26,8 +26,6 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import com.mysql.cj.xdevapi.Statement;
-
 public class Archive extends JFrame implements ActionListener,ItemListener{
 	
 	private static final long serialVersionUID = 1L;
@@ -44,7 +42,7 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 		 {
 			 setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 			 
-			 setBounds(450, 190, 1014, 597);
+			 setBounds(450, 190, 500, 597);
 			 setResizable(true);
 		        setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\DESKTOP\\book.png"));
 		        setTitle("Archive List");
@@ -52,6 +50,7 @@ public class Archive extends JFrame implements ActionListener,ItemListener{
 		        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		        setContentPane(contentPane);
 		        contentPane.setLayout(null);
+		        contentPane.setBackground(Color.CYAN);
 		        
 		        this.setLayout(new FlowLayout());
 		          

@@ -7,13 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.sql.*;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,7 +21,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
-import com.mysql.cj.xdevapi.Statement;
 import com.toedter.calendar.JDateChooser;
 
 
@@ -50,6 +45,8 @@ public class AddEvent extends JFrame{
 	        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	        setContentPane(contentPane);
 	        contentPane.setLayout(null);
+	        contentPane.setBackground(Color.CYAN);
+	        
 	        //-----eventName----
 	        eventName = new JTextField();
 	        eventName.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -63,6 +60,7 @@ public class AddEvent extends JFrame{
 	        lblEventName.setFont(new Font("Tahoma", Font.PLAIN, 31));
 	        lblEventName.setBounds(210, 30, 500, 68);
 	        contentPane.add(lblEventName);
+	        
 	        
 	      //-----event description----
 	        eventDescription = new JTextField();

@@ -1,32 +1,19 @@
 package ihm;
 
-import java.awt.BorderLayout;
-
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.*;
-import java.sql.Connection;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
 import com.toedter.calendar.JDateChooser;
 public class Modifier extends  JFrame implements ActionListener,ItemListener {
 	
@@ -52,15 +39,18 @@ public class Modifier extends  JFrame implements ActionListener,ItemListener {
 		this.Selectplace=Selectplace;
 		this.selctdate=selctdate;
 		this.selectdescription = selctdescription;
-		     frame = new JFrame("event");
+		     frame = new JFrame("Events Management");
+		     frame.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\DESKTOP\\book.png"));
+
                  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                 frame.setLayout(new GridLayout(4,2));
-                 frame.setSize(500,500);
+                 frame.setLayout(new GridLayout(5,2));
+                 frame.setBackground(Color.CYAN);
+                 frame.setBounds(450, 190, 500, 597);;
                eventname =new JTextField(selecttitre);
                 eventname.setSize(10,10);
                 description =new JTextField(selecttitre);
                 description.setSize(10,10);
-                 Place =new JTextField(selectdescription);
+                 Place =new JTextField(selctdescription);
                 
          		lblname =new JLabel("Event Name");
         		lbldescription =new JLabel("Event Description");
@@ -78,8 +68,10 @@ public class Modifier extends  JFrame implements ActionListener,ItemListener {
                 frame.add(place);
                 frame.add(Place);
                 frame.add(date);
-               // frame.add(Date);
                 frame.add(dateChooser);
+               frame.add(lbldescription);
+               frame.add(description);
+                
                  frame.add(Modifier);
                  frame.setVisible(true);
                 

@@ -55,6 +55,8 @@ public class UserHome extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+        contentPane.setBackground(Color.CYAN);
+        
         JButton logoutButton = new JButton("Logout");
         logoutButton.setForeground(new Color(0, 0, 0));
         logoutButton.setBackground(UIManager.getColor("Button.disabledForeground"));
