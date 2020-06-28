@@ -26,6 +26,10 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.mysql.cj.xdevapi.Statement;
+import com.sun.corba.se.pept.transport.Connection;
+
+
 import ihm.UserLogin;
 
 public class EventsList extends JFrame implements ActionListener,ItemListener{
@@ -35,7 +39,8 @@ public class EventsList extends JFrame implements ActionListener,ItemListener{
 
     static JTable mysTable;
     JTable table;
-
+  
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	 public EventsList (){
@@ -49,6 +54,7 @@ public class EventsList extends JFrame implements ActionListener,ItemListener{
 	        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 	        setContentPane(contentPane);
 	        contentPane.setLayout(null);
+	        
 	        
 	       
 	          this.setLayout(new FlowLayout());

@@ -24,6 +24,7 @@ public class ChangePassword extends JFrame {
     private JPanel contentPane;
     private JTextField textField;
     private JLabel lblEnterNewPassword;
+
     /**
      * Launch the application.
      */
@@ -46,6 +47,7 @@ public class ChangePassword extends JFrame {
     public ChangePassword(String name) {
         setBounds(450, 360, 1024, 234);
         setResizable(false);
+        
 
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -82,6 +84,7 @@ public class ChangePassword extends JFrame {
                 } catch (SQLException sqlException) {
                     sqlException.printStackTrace();
                 }
+
             }
         });
         btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 29));

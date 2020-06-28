@@ -107,7 +107,9 @@ public class UserHome extends JFrame {
         changePwdButton.setFont(new Font("Tahoma", Font.PLAIN, 35));
         changePwdButton.setBounds(247, 250, 491, 114);
         contentPane.add(changePwdButton);
-
+        
+        
+        
         JButton eventsListButton = new JButton("Events List\r\n");
         eventsListButton.setBackground(UIManager.getColor("Button.disabledForeground"));
         eventsListButton.addActionListener(new ActionListener() {
