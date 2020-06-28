@@ -26,6 +26,10 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.mysql.cj.xdevapi.Statement;
+import com.sun.corba.se.pept.transport.Connection;
+
+
 import ihm.UserLogin;
 
 public class EventsList extends JFrame implements ActionListener,ItemListener{
